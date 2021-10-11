@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Book from "./Book";
 
 function Books() {
   function Books() {
@@ -16,7 +17,7 @@ function Books() {
       <div className="container">
         <div className="row">
           {books.map((book) => (
-            <Book></Book>
+            <Book key={book.id} book={book}></Book>
           ))}
         </div>
       </div>
