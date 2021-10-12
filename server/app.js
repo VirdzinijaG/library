@@ -110,7 +110,7 @@ app.get('/books/count', (req, res) => {
 // GROUP BY Country
 // ORDER BY COUNT(CustomerID) DESC;
 
-app.get('/books/cat-count', (req, res) => {
+app.get('/books/category-count', (req, res) => {
     con.query(`SELECT
     COUNT(id) AS count, category
     FROM books

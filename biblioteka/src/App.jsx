@@ -10,7 +10,8 @@ function App() {
   const [books, setBooks] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [modalId, setModalId] = useState(0);
-  const [booksCount, setBooksCount] = useState(0)
+  const [booksCount, setBooksCount] = useState(0);
+  const [categoryCount, setCategoryCount] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:3003/books").then((response) => {
@@ -20,12 +21,22 @@ function App() {
 
 
   // statistic
+  // all books
   useEffect(() => {
     axios.get('http://localhost:3003/books/count')
       .then((response) => {
         setBooksCount(response.data[0].booksCount);
       })
   }, [lastUpdate])
+
+// category count
+useEffect(() => {
+  axios.get('http://localhost:3003/books/category-count')
+    .then((response) => {
+      console.log(response.data);
+      setCategoryCount(response.data);
+    })
+}, [lastUpdate])
 
   const addBook = (book) => {
     axios.post("http://localhost:3003/books", book).then(() => {
@@ -89,7 +100,7 @@ function App() {
 
   return (
     <>
-      <Top sort={sort} booksCount={booksCount} ></Top>
+      <Top sort={sort} booksCount={booksCount} categoryCount={categoryCount} ></Top>
       <NewBook addBook={addBook}></NewBook>
       <Books books={books} deleteBook={deleteBook} showModal={showModal}></Books>
       <Modal id={modalId} editBook={editBook} book={getBook(modalId)} hideModal={hideModal}></Modal>

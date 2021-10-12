@@ -1,4 +1,4 @@
-function Top({ sort, booksCount }) {
+function Top({ sort, booksCount, categoryCount }) {
   return (
     <>
       <div className="container">
@@ -17,6 +17,7 @@ function Top({ sort, booksCount }) {
               <div className="card-body">
                 <h5 className="card-title">Statistic</h5>
                 <h6>Books count: {booksCount}</h6>
+                {categoryCount.map(category => <h6 style={{ color: 'gray' }} key={category.category}>{category.category}: {category.count}</h6>)}
               </div>
             </div>
           </div>
