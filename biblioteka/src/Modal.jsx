@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Modal({ id, book }) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
   const [pages, setPages] = useState("");
+
+  useEffect(() => {
+    setTitle(book.title);
+    setAuthor(book.author);
+    setCategory(book.category);
+    setPages(book.pages);
+  }, [id]);
 
   const control = (e, what) => {
     switch (what) {
@@ -47,7 +54,7 @@ function Modal({ id, book }) {
           <div className="col-12">
             <div className="card m-3">
               <div className="card-body">
-                <h5 className="card-title">New Book</h5>
+                <h5 className="card-title">Edit Book</h5>
                 <div className="form-group">
                   <label>Title</label>
                   <input
@@ -57,7 +64,7 @@ function Modal({ id, book }) {
                     value={title}
                   />
                   <small className="form-text text-muted">
-                    Enter new book title
+                    Edit book title
                   </small>
                 </div>
                 <div className="form-group">
@@ -69,7 +76,7 @@ function Modal({ id, book }) {
                     value={author}
                   />
                   <small className="form-text text-muted">
-                    Enter author name
+                    Edit author name
                   </small>
                 </div>
                 <div className="form-group">
@@ -81,7 +88,7 @@ function Modal({ id, book }) {
                     value={category}
                   />
                   <small className="form-text text-muted">
-                    Enter books category
+                    Edit books category
                   </small>
                 </div>
                 <div className="form-group">
@@ -93,11 +100,11 @@ function Modal({ id, book }) {
                     value={pages}
                   />
                   <small className="form-text text-muted">
-                    Enter books page count
+                    Edit books page count
                   </small>
                 </div>
                 <button type="button" className="btn btn-info" onClick={insert}>
-                  Add Book
+                  Edit Book
                 </button>
               </div>
             </div>

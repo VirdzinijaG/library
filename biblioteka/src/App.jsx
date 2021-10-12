@@ -23,6 +23,13 @@ function App() {
     });
   };
 
+  const editBook = (id, book) => {
+    axios.put("http://localhost:3003/books/" + id, book)
+    .then(() => {
+      setLastUpdate(Date.now());
+    });
+  };
+
   const deleteBook = (id) => {
     axios.delete("http://localhost:3003/books/" + id).then(() => {
       setLastUpdate(Date.now());
@@ -52,6 +59,7 @@ function App() {
         books={books}
         deleteBook={deleteBook}
         showModal={showModal}
+        editBook={editBook}
       ></Books>
       <Modal id={modalId} book={getBook(modalId)}></Modal>
     </>
