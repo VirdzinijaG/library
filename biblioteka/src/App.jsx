@@ -29,14 +29,14 @@ function App() {
       })
   }, [lastUpdate])
 
-// category count
-useEffect(() => {
-  axios.get('http://localhost:3003/books/category-count')
-    .then((response) => {
-      console.log(response.data);
-      setCategoryCount(response.data);
-    })
-}, [lastUpdate])
+  // category count
+  useEffect(() => {
+    axios.get('http://localhost:3003/books/category-count')
+      .then((response) => {
+        console.log(response.data);
+        setCategoryCount(response.data);
+      })
+  }, [lastUpdate])
 
   const addBook = (book) => {
     axios.post("http://localhost:3003/books", book).then(() => {
@@ -56,9 +56,16 @@ useEffect(() => {
     });
   };
 
+
+  // pataisytas return, nes console mete klaidas
   const getBook = (id) => {
     if (id === 0) {
-      return [];
+      return {
+        title: '',
+        author: '',
+        category: '',
+        pages: '',
+      };
     }
     for (let i = 0; i < books.length; i++) {
       if (books[i].id === id) {
