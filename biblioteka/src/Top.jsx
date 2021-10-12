@@ -1,4 +1,4 @@
-function Top({ sort }) {
+function Top({ sort, allBooks }) {
   return (
     <>
       <div className="container">
@@ -13,7 +13,12 @@ function Top({ sort }) {
             </div>
           </div>
           <div className="col">
-            2 of 2
+            <div className="card m-3">
+              <div className="card-body">
+                <h5 className="card-title">Statistic</h5>
+                <h6>Books count: {allBooks}</h6>
+              </div>
+            </div>
           </div>
         </div>
       </div>

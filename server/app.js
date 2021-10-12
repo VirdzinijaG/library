@@ -91,7 +91,9 @@ app.get('/books', (req, res) => {
     })
 })
 
-// skaiciuoka irasus
+
+
+// skaiciuoja irasus
 // SELECT COUNT(ProductID) AS NumberOfProducts FROM Products;
 app.get('/books/count', (req, res) => {
     con.query('SELECT COUNT(id) AS booksCount FROM books', (err, results) => {

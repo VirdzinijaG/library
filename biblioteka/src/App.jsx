@@ -10,10 +10,19 @@ function App() {
   const [books, setBooks] = useState([]);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [modalId, setModalId] = useState(0);
+  const [booksCount, setBooksCount] = useState(0)
 
   useEffect(() => {
     axios.get("http://localhost:3003/books").then((response) => {
       setBooks(response.data);
+    });
+  }, [lastUpdate]);
+
+
+  // statistic
+  useEffect(() => {
+    axios.get("http://localhost:3003/books/count").then((response) => {
+      setBooksCount(response.data);
     });
   }, [lastUpdate]);
 
