@@ -21,10 +21,11 @@ function App() {
 
   // statistic
   useEffect(() => {
-    axios.get("http://localhost:3003/books/count").then((response) => {
-      setBooksCount(response.data);
-    });
-  }, [lastUpdate]);
+    axios.get('http://localhost:3003/books/count')
+      .then((response) => {
+        setBooksCount(response.data[0].booksCount);
+      })
+  }, [lastUpdate])
 
   const addBook = (book) => {
     axios.post("http://localhost:3003/books", book).then(() => {
@@ -88,7 +89,7 @@ function App() {
 
   return (
     <>
-      <Top sort={sort}></Top>
+      <Top sort={sort} booksCount={booksCount} ></Top>
       <NewBook addBook={addBook}></NewBook>
       <Books books={books} deleteBook={deleteBook} showModal={showModal}></Books>
       <Modal id={modalId} editBook={editBook} book={getBook(modalId)} hideModal={hideModal}></Modal>
