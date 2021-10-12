@@ -69,7 +69,7 @@ app.delete('/books/:id', (req, res) => {
 // WHERE some_column=some_value 
 app.put('/books/:id', (req, res) => {
     const sql = `
-        UPDATE posts
+        UPDATE books
         SET title = ?, author = ?, category = ?, pages = ?
         WHERE id = ?
         `;
@@ -81,10 +81,40 @@ app.put('/books/:id', (req, res) => {
     })
 })
 
-
 // rodo visus postus
 app.get('/books', (req, res) => {
     con.query('SELECT * FROM books ORDER BY id DESC', (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.json(results);
+    })
+})
+
+// skaiciuoka irasus
+// SELECT COUNT(ProductID) AS NumberOfProducts FROM Products;
+app.get('/books/count', (req, res) => {
+    con.query('SELECT COUNT(id) AS booksCount FROM books', (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.json(results);
+    })
+})
+
+// skaiciuoja kiekvienos kategorijos knygas
+// SELECT COUNT(CustomerID), Country
+// FROM Customers
+// GROUP BY Country
+// ORDER BY COUNT(CustomerID) DESC;
+
+app.get('/books/cat-count', (req, res) => {
+    con.query(`SELECT
+    COUNT(id) AS count, category
+    FROM books
+    GROUP BY category
+    ORDER BY COUNT(id) DESC
+    `, (err, results) => {
         if (err) {
             throw err;
         }
