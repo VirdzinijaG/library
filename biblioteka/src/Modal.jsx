@@ -58,12 +58,7 @@ function Modal({ id, book, editBook, hideModal }) {
                 <h5 className="card-title">Edit Book</h5>
                 <div className="form-group">
                   <label>Title</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => control(e, "title")}
-                    value={title}
-                  />
+                  <input type="text" className="form-control" onChange={(e) => control(e, "title")} value={title} />
                   <small className="form-text text-muted">
                     Edit book title
                   </small>

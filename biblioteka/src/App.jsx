@@ -24,8 +24,7 @@ function App() {
   };
 
   const editBook = (id, book) => {
-    axios.put("http://localhost:3003/books/" + id, book)
-    .then(() => {
+    axios.put("http://localhost:3003/books/" + id, book).then(() => {
       setLastUpdate(Date.now());
     });
   };
@@ -51,19 +50,38 @@ function App() {
     setModalId(id);
   };
 
-
   const hideModal = (id) => {
     setModalId(0);
+  };
+
+
+  const sort = by => {
+    const booksCopy = books.slice();
+    if ('title' === by) {
+      booksCopy.sort((a, b) => {
+        if (a.title > b.title) {
+          return 1
+        }
+        if (a.title < b.title) {
+          return -1
+        }
+        return 0
+      })
+      setBooks(booksCopy)
+    }
+    if ('pages' === by) {
+      booksCopy.sort((a, b) => a.pages - b.pages)
+
+
+      setBooks(booksCopy)
+    }
   }
+
   return (
     <>
-      <Top></Top>
+      <Top sort={sort}></Top>
       <NewBook addBook={addBook}></NewBook>
-      <Books
-        books={books}
-        deleteBook={deleteBook}
-        showModal={showModal}
-      ></Books>
+      <Books books={books} deleteBook={deleteBook} showModal={showModal}></Books>
       <Modal id={modalId} editBook={editBook} book={getBook(modalId)} hideModal={hideModal}></Modal>
     </>
   );
