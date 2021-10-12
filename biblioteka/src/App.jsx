@@ -51,6 +51,10 @@ function App() {
     setModalId(id);
   };
 
+
+  const hideModal = (id) => {
+    setModalId(0);
+  }
   return (
     <>
       <Top></Top>
@@ -59,9 +63,8 @@ function App() {
         books={books}
         deleteBook={deleteBook}
         showModal={showModal}
-        editBook={editBook}
       ></Books>
-      <Modal id={modalId} book={getBook(modalId)}></Modal>
+      <Modal id={modalId} editBook={editBook} book={getBook(modalId)} hideModal={hideModal}></Modal>
     </>
   );
 }

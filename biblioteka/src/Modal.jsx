@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-function Modal({ id, book }) {
-  const [title, setTitle] = useState();
+function Modal({ id, book, editBook, hideModal }) {
+  const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
   const [pages, setPages] = useState("");
@@ -11,7 +11,7 @@ function Modal({ id, book }) {
     setAuthor(book.author);
     setCategory(book.category);
     setPages(book.pages);
-  }, [id]);
+  }, [book]);
 
   const control = (e, what) => {
     switch (what) {
@@ -30,13 +30,14 @@ function Modal({ id, book }) {
     }
   };
 
-  const insert = () => {
-    //    addBook({
-    //         title: title,
-    //         author: author,
-    //         category: category,
-    //         pages: pages
-    //     });
+  const edit = () => {
+    editBook(id, {
+      title: title,
+      author: author,
+      category: category,
+      pages: pages,
+    });
+    hideModal();
     setTitle("");
     setAuthor("");
     setCategory("");
@@ -103,8 +104,19 @@ function Modal({ id, book }) {
                     Edit books page count
                   </small>
                 </div>
-                <button type="button" className="btn btn-info" onClick={insert}>
+                <button
+                  type="button"
+                  className="btn btn-info m-1"
+                  onClick={edit}
+                >
                   Edit Book
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger m-1"
+                  onClick={hideModal}
+                >
+                  Cancel
                 </button>
               </div>
             </div>

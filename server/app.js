@@ -67,13 +67,13 @@ app.delete('/books/:id', (req, res) => {
 // UPDATE table_name
 // SET column1=value, column2=value2,...
 // WHERE some_column=some_value 
-app.put('/posts/:id', (req, res) => {
+app.put('/books/:id', (req, res) => {
     const sql = `
         UPDATE posts
-        SET title = ?, body = ?
+        SET title = ?, author = ?, category = ?, pages = ?
         WHERE id = ?
         `;
-    con.query(sql, [req.body.title, req.body.body, req.params.id], (err, result) => {
+    con.query(sql, [req.body.title, req.body.author, req.body.category, req.body.pages, req.params.id], (err, result) => {
         if (err) {
             throw err;
         }
