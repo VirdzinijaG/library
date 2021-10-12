@@ -41,7 +41,7 @@ function Modal({ id, book }) {
   }
 
   return (
-    <>
+    <div className="edit-modal">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -104,7 +104,7 @@ function Modal({ id, book }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
